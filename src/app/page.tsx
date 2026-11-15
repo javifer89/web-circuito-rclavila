@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { ButtonLink, ArrowRight } from "@/components/ui/button";
 import { Container, Section } from "@/components/layout/container";
@@ -7,6 +8,8 @@ import { site, whatsappUrl } from "@/content/site";
 import { classes } from "@/content/circuito";
 import { upcomingEvents, eventDayMonth, eventTypes } from "@/content/eventos";
 import { posts, formatPostDate } from "@/content/noticias";
+import fotoSocios from "@/assets/foto sudaderas nuevas.jpeg";
+import vistaAerea from "@/assets/vista aerea circuito.jpeg";
 
 export const ensureStatic = "navigation";
 
@@ -27,7 +30,7 @@ export default function HomePage() {
       <section className="relative overflow-hidden border-b border-line">
         <div
           aria-hidden="true"
-          className="absolute inset-0 bg-[radial-gradient(ellipse_at_20%_0%,rgba(255,77,0,0.16),transparent_55%)]"
+          className="absolute inset-0 bg-[radial-gradient(ellipse_at_20%_0%,rgba(228,36,124,0.10),transparent_55%)]"
         />
         <div aria-hidden="true" className="stripe-pattern absolute inset-0 opacity-60" />
 
@@ -69,12 +72,16 @@ export default function HomePage() {
           </div>
 
           <div className="relative">
-            <MediaPlaceholder
-              label="Foto del circuito"
-              note="Pendiente de contenido oficial"
-              ratio="aspect-[4/5]"
-              className="lg:aspect-[4/5]"
-            />
+            <div className="relative aspect-[4/3] overflow-hidden border border-line">
+              <Image
+                src={fotoSocios}
+                alt="Socios del RC La Vila con sus coches delante de la zona de boxes"
+                priority
+                placeholder="blur"
+                sizes="(min-width: 1024px) 42vw, 100vw"
+                className="h-full w-full object-cover object-center"
+              />
+            </div>
             <div className="absolute -bottom-4 -left-4 hidden bg-accent px-4 py-3 sm:block">
               <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-asphalt">
                 Acceso con llave
@@ -116,12 +123,19 @@ export default function HomePage() {
             </ButtonLink>
           </div>
 
-          <div className="order-1 grid gap-4 lg:order-2">
-            <MediaPlaceholder label="Vista aérea de la pista" note="Pendiente de contenido oficial" ratio="aspect-[16/10]" />
-            <div className="grid grid-cols-2 gap-4">
-              <MediaPlaceholder label="Zona de boxes" ratio="aspect-square" />
-              <MediaPlaceholder label="Podio y pit lane" ratio="aspect-square" />
+          <div className="order-1 lg:order-2">
+            <div className="relative aspect-[16/10] overflow-hidden border border-line">
+              <Image
+                src={vistaAerea}
+                alt="Vista aérea del trazado del circuito RC La Vila"
+                placeholder="blur"
+                sizes="(min-width: 1024px) 50vw, 100vw"
+                className="h-full w-full object-cover object-center"
+              />
             </div>
+            <p className="mt-3 text-[11px] uppercase tracking-[0.14em] text-muted">
+              Vista aérea del trazado
+            </p>
           </div>
         </div>
       </Section>

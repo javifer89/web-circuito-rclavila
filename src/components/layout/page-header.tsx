@@ -16,7 +16,7 @@ export function PageHeader({
     <section className="relative overflow-hidden border-b border-line bg-surface/50">
       <div
         aria-hidden="true"
-        className="absolute inset-0 bg-[radial-gradient(ellipse_at_15%_0%,rgba(255,77,0,0.12),transparent_60%)]"
+        className="absolute inset-0 bg-[radial-gradient(ellipse_at_15%_0%,rgba(228,36,124,0.09),transparent_60%)]"
       />
       <Container className="relative py-14 sm:py-20">
         <p className="eyebrow">{eyebrow}</p>

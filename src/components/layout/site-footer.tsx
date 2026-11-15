@@ -1,7 +1,9 @@
+import Image from "next/image";
 import Link from "next/link";
 import { nav, site } from "@/content/site";
 import { Container } from "@/components/layout/container";
 import { getCopyrightYear } from "@/lib/build-year";
+import logo from "@/assets/logo-rclavila.png";
 
 export async function SiteFooter() {
   const year = await getCopyrightYear();
@@ -11,8 +13,13 @@ export async function SiteFooter() {
       <Container className="py-14">
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
           <div className="lg:col-span-1">
-            <p className="display-md text-xl text-dust">RC La Vila</p>
-            <p className="mt-3 max-w-xs text-sm leading-relaxed text-muted">{site.claim}.</p>
+            <Image
+              src={logo}
+              alt="Logo de RC La Vila"
+              sizes="160px"
+              className="h-20 w-auto"
+            />
+            <p className="mt-5 max-w-xs text-sm leading-relaxed text-muted">{site.claim}.</p>
             <div className="mt-5 flex gap-3">
               {site.contact.instagram ? (
                 <a

@@ -25,7 +25,7 @@ export function MediaPlaceholder({
     >
       <div
         aria-hidden="true"
-        className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,77,0,0.12),transparent_60%)]"
+        className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(228,36,124,0.10),transparent_60%)]"
       />
       <div className="relative flex flex-col items-center gap-2 px-6 text-center">
         <svg

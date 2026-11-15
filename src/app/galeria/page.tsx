@@ -1,9 +1,12 @@
 import type { Metadata } from "next";
+import Image, { type StaticImageData } from "next/image";
 import { PageHeader } from "@/components/layout/page-header";
 import { Section } from "@/components/layout/container";
 import { MediaPlaceholder } from "@/components/ui/media-placeholder";
 import { ButtonLink } from "@/components/ui/button";
 import { site, whatsappUrl } from "@/content/site";
+import vistaAerea from "@/assets/vista aerea circuito.jpeg";
+import fotoSocios from "@/assets/foto sudaderas nuevas.jpeg";
 
 export const ensureStatic = "navigation";
 
@@ -14,26 +17,70 @@ export const metadata: Metadata = {
   alternates: { canonical: "/galeria" },
 };
 
-const albums = [
+type Photo = {
+  label: string;
+  image?: StaticImageData;
+  alt?: string;
+};
+
+const albums: Array<{ title: string; description: string; photos: Photo[] }> = [
   {
     title: "La pista",
-    description: "Vistas del trazado, las curvas técnicas y la recta principal.",
-    items: ["Recta principal", "Curva norte", "Doble de boxes", "Salto central"],
+    description: "El trazado completo, las curvas técnicas y la recta principal.",
+    photos: [
+      {
+        label: "Vista aérea",
+        image: vistaAerea,
+        alt: "Vista aérea del trazado del circuito RC La Vila",
+      },
+      { label: "Recta principal" },
+      { label: "Curva norte" },
+      { label: "Doble de boxes" },
+    ],
+  },
+  {
+    title: "El club",
+    description: "Los socios, las sudaderas del club y el ambiente de los domingos.",
+    photos: [
+      {
+        label: "Socios en pista",
+        image: fotoSocios,
+        alt: "Socios del RC La Vila con sus coches delante de la zona de boxes",
+      },
+      { label: "Trabajo de cuadrilla" },
+      { label: "Iniciación" },
+      { label: "Asamblea" },
+    ],
   },
   {
     title: "Boxes y podio",
     description: "La zona de trabajo, el pit lane y el podio cubierto.",
-    items: ["Mesa de boxes", "Pit lane elevado", "Podio", "Zona de lavado"],
+    photos: [
+      { label: "Mesa de boxes" },
+      { label: "Pit lane elevado" },
+      { label: "Podio" },
+      { label: "Zona de lavado" },
+    ],
   },
   {
     title: "Carreras",
     description: "Mangas, finales y ambiente de las pruebas sociales.",
-    items: ["Salida de manga", "Final buggy", "Entrega de trofeos", "Público"],
+    photos: [
+      { label: "Salida de manga" },
+      { label: "Final buggy" },
+      { label: "Entrega de trofeos" },
+      { label: "Público" },
+    ],
   },
   {
     title: "Detrás del club",
     description: "Mantenimiento, mejoras y trabajo de fin de semana.",
-    items: ["Riego de pista", "Cerramiento", "Cuadrilla", "Montaje de boxes"],
+    photos: [
+      { label: "Riego de pista" },
+      { label: "Cerramiento" },
+      { label: "Cuadrilla" },
+      { label: "Montaje de boxes" },
+    ],
   },
 ];
 
@@ -43,7 +90,7 @@ export default function GaleriaPage() {
       <PageHeader
         eyebrow="Galería"
         title="El circuito, en imágenes"
-        description="La galería se irá llenando con material del club. Mientras tanto, esta es la estructura prevista por bloques."
+        description="La galería se irá llenando con material del club. Lo que ya hay publicado es del propio circuito; el resto son huecos reservados."
       >
         <ButtonLink href={whatsappUrl("Hola, tengo fotos o vídeos del circuito para la galería.")} external>
           Enviar material
@@ -60,14 +107,33 @@ export default function GaleriaPage() {
                   <p className="mt-2 text-sm text-muted">{album.description}</p>
                 </div>
                 <p className="text-[11px] uppercase tracking-[0.14em] text-muted">
-                  {album.items.length} imágenes
+                  {album.photos.length} imágenes
                 </p>
               </div>
 
               <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-                {album.items.map((item) => (
-                  <MediaPlaceholder key={item} label={item} ratio="aspect-[4/3]" />
-                ))}
+                {album.photos.map((photo) => {
+                  if (!photo.image) {
+                    return <MediaPlaceholder key={photo.label} label={photo.label} ratio="aspect-[4/3]" />;
+                  }
+
+                  return (
+                    <figure key={photo.label} className="group relative">
+                      <div className="relative aspect-[4/3] overflow-hidden border border-line">
+                        <Image
+                          src={photo.image}
+                          alt={photo.alt ?? photo.label}
+                          placeholder="blur"
+                          sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
+                          className="h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-[1.03]"
+                        />
+                      </div>
+                      <figcaption className="mt-2 text-[10px] uppercase tracking-[0.14em] text-muted">
+                        {photo.label}
+                      </figcaption>
+                    </figure>
+                  );
+                })}
               </div>
             </section>
           ))}

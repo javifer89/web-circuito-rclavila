@@ -7,7 +7,7 @@ export default function NotFound() {
     <section className="relative overflow-hidden border-b border-line">
       <div
         aria-hidden="true"
-        className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_0%,rgba(255,77,0,0.14),transparent_60%)]"
+        className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_0%,rgba(228,36,124,0.10),transparent_60%)]"
       />
       <Container className="relative flex flex-col items-start py-24 sm:py-32">
         <p className="eyebrow">Error 404</p>

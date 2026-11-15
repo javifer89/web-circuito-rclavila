@@ -7,8 +7,11 @@
   --color-line: #2b2b33;
   --color-dust: #ece7df;
   --color-muted: #9d9a95;
-  --color-accent: #ff4d00;
-  --color-accent-soft: #ff8a3d;
+  /* Brand palette, sampled from the club logo. */
+  --color-accent: #e4247c;
+  --color-accent-soft: #ff5aa3;
+  --color-lime: #c5d419;
+  --color-lime-soft: #dcea5f;
 
   --font-display: var(--font-barlow);
   --font-sans: var(--font-inter);

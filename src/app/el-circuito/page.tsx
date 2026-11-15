@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { PageHeader } from "@/components/layout/page-header";
 import { Section } from "@/components/layout/container";
 import { SectionHeading } from "@/components/ui/section-heading";
-import { MediaPlaceholder } from "@/components/ui/media-placeholder";
 import { ButtonLink, ArrowRight } from "@/components/ui/button";
 import { specs, facilities, classes } from "@/content/circuito";
+import vistaAerea from "@/assets/vista aerea circuito.jpeg";
 
 export const ensureStatic = "navigation";
 
@@ -101,18 +102,28 @@ export default function ElCircuitoPage() {
 
       <Section className="border-t border-line">
         <SectionHeading
-          eyebrow="Galería"
-          title="Así se ve la pista por dentro"
+          eyebrow="El trazado"
+          title="La pista, vista desde el aire"
+          description="El recorrido completo de un vistazo: recta principal, enlazadas y la zona de boxes al fondo del recinto."
           action={
             <ButtonLink href="/galeria" variant="outline">
               Ver galería
             </ButtonLink>
           }
         />
-        <div className="mt-12 grid gap-4 sm:grid-cols-3">
-          <MediaPlaceholder label="Recta principal" ratio="aspect-[4/3]" />
-          <MediaPlaceholder label="Zona de boxes" ratio="aspect-[4/3]" />
-          <MediaPlaceholder label="Curva técnica" ratio="aspect-[4/3]" />
+        <div className="mt-12">
+          <div className="relative aspect-[16/9] overflow-hidden border border-line">
+            <Image
+              src={vistaAerea}
+              alt="Vista aérea del trazado del circuito RC La Vila"
+              placeholder="blur"
+              sizes="(min-width: 1024px) 1152px, 100vw"
+              className="h-full w-full object-cover object-center"
+            />
+          </div>
+          <p className="mt-3 text-[11px] uppercase tracking-[0.14em] text-muted">
+            Vista aérea del trazado
+          </p>
         </div>
       </Section>
 

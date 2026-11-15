@@ -1,9 +1,11 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { nav, site } from "@/content/site";
+import logo from "@/assets/logo-rclavila.png";
 import { cn } from "@/lib/cn";
 
 function isActive(pathname: string, href: string) {
@@ -31,16 +33,14 @@ export function SiteHeader() {
       </a>
 
       <div className="mx-auto flex h-16 w-full max-w-7xl items-center justify-between gap-6 px-5 sm:px-8 lg:h-20">
-        <Link href="/" className="flex shrink-0 items-center gap-3" aria-label={`${site.name} — inicio`}>
-          <span className="flex h-9 w-9 items-center justify-center border border-accent/70 bg-accent/10">
-            <span className="display-md text-[15px] leading-none text-accent">RC</span>
-          </span>
-          <span className="flex flex-col leading-none">
-            <span className="display-md text-[15px] tracking-[0.04em] text-dust">La Vila</span>
-            <span className="mt-1 text-[9px] font-medium uppercase tracking-[0.24em] text-muted">
-              Radiocontrol
-            </span>
-          </span>
+        <Link href="/" className="flex shrink-0 items-center" aria-label={`${site.name} — inicio`}>
+          <Image
+            src={logo}
+            alt=""
+            priority
+            sizes="(min-width: 1024px) 90px, 68px"
+            className="h-11 w-auto sm:h-12 lg:h-16"
+          />
         </Link>
 
         <nav aria-label="Navegación principal" className="hidden items-center gap-7 lg:flex">

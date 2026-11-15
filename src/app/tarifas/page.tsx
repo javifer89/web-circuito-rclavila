@@ -97,17 +97,17 @@ export default function TarifasPage() {
           ))}
         </div>
 
-        <div className="mt-6 flex flex-col gap-5 border border-accent/30 bg-accent/[0.05] p-7 sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-6 flex flex-col gap-5 border border-lime/25 bg-lime/[0.04] p-7 sm:flex-row sm:items-center sm:justify-between">
           <div>
             <div className="flex flex-wrap items-center gap-3">
               <h2 className="display-md text-xl text-dust">{dayPass.title}</h2>
-              <span className="border border-accent/40 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-[0.14em] text-accent">
+              <span className="border border-lime/40 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-[0.14em] text-lime">
                 {dayPass.status}
               </span>
             </div>
             <p className="mt-3 max-w-xl text-sm leading-relaxed text-muted">{dayPass.description}</p>
           </div>
-          <p className="display-xl shrink-0 text-4xl text-accent">{dayPass.price}</p>
+          <p className="display-xl shrink-0 text-4xl text-lime">{dayPass.price}</p>
         </div>
       </Section>
 
@@ -118,7 +118,7 @@ export default function TarifasPage() {
             <ul className="mt-6 space-y-3">
               {included.map((item) => (
                 <li key={item} className="flex gap-3 text-sm leading-relaxed text-muted">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="mt-0.5 h-4 w-4 shrink-0 text-accent">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="mt-0.5 h-4 w-4 shrink-0 text-lime">
                     <path d="M4 12l5 5L20 6" />
                   </svg>
                   {item}

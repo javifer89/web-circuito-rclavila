@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { PageHeader } from "@/components/layout/page-header";
 import { Section } from "@/components/layout/container";
 import { SectionHeading } from "@/components/ui/section-heading";
-import { MediaPlaceholder } from "@/components/ui/media-placeholder";
 import { ButtonLink } from "@/components/ui/button";
 import { history, board, documents, values } from "@/content/el-club";
 import { site } from "@/content/site";
+import fotoSocios from "@/assets/foto sudaderas nuevas.jpeg";
 
 export const ensureStatic = "navigation";
 
@@ -39,11 +40,15 @@ export default function ElClubPage() {
             ))}
           </div>
 
-          <MediaPlaceholder
-            label="Foto de socios trabajando"
-            note="Pendiente de contenido oficial"
-            ratio="aspect-[4/5]"
-          />
+          <div className="relative aspect-[4/3] overflow-hidden border border-line">
+            <Image
+              src={fotoSocios}
+              alt="Socios del RC La Vila con sus coches en la pista"
+              placeholder="blur"
+              sizes="(min-width: 1024px) 40vw, 100vw"
+              className="h-full w-full object-cover object-center"
+            />
+          </div>
         </div>
       </Section>
 

@@ -226,7 +226,7 @@ export function MembershipForm() {
         <button
           type="submit"
           disabled={!consent}
-          className="inline-flex items-center justify-center bg-accent px-8 py-4 text-[12px] font-semibold uppercase tracking-[0.12em] text-asphalt transition-colors hover:bg-accent-soft disabled:cursor-not-allowed disabled:opacity-40"
+          className="inline-flex items-center justify-center bg-accent px-8 py-4 text-[12px] font-semibold uppercase tracking-[0.12em] text-asphalt transition-colors hover:bg-accent-soft disabled:cursor-not-allowed disabled:border disabled:border-line disabled:bg-transparent disabled:text-muted"
         >
           Preparar solicitud
         </button>
