@@ -7,21 +7,25 @@ export type Post = {
   body: string[];
 };
 
-// TODO(contenido): sustituir por noticias reales del club.
+// Nueva noticia: Ayuntameto de Villajoyosa cede parcela al RC La Vila
+export const ayuntamientoCesionPost: Post = {
+  slug: "cesion-parcela-ayuntamiento",
+  date: "2026-10-23",
+  title: "Ayuntamiento de Villajoyosa cede la parcela al RC La Vila",
+  excerpt:
+    "El consistorio visitó la pista para conocer la actividad del club y formalizar la cesión del terreno. La visita se compartirá también en los canales municipales como punto de partida del radiocontrol en la ciudad.",
+  tag: "Instalaciones",
+  body: [
+    "El consistorio visitó la pista para conocer de primera mano la actividad del club y formalizar la cesión del terreno.",
+    "La visita contó con la presencia de representantes municipales y miembros de la junta directiva del RC La Vila.",
+    "Este hito marca el inicio oficial del circuito como instalación municipal, permitiendo al club organizar pruebas y eventos con el apoyo del ayuntamiento.",
+    "La noticia también se ha publicado en los canales oficiales del Ayuntamiento de Villajoyosa, destacando el compromiso del consistorio con el deporte del radiocontrol en la ciudad.",
+  ],
+};
+
+// Posts existentes (pronto se sustituirán por contenido real del club)
 export const posts: Post[] = [
-  {
-    slug: "cerramiento-perimetral",
-    date: "2026-11-08",
-    title: "Arranca el cerramiento perimetral de la parcela",
-    excerpt:
-      "Las obras de vallado y cierre del recinto ya están en marcha. La pista sigue operativa para socios durante toda la ejecución.",
-    tag: "Instalaciones",
-    body: [
-      "Esta semana han comenzado los trabajos de cerramiento perimetral de la parcela. La actuación incluye el vallado completo del recinto, la puerta de acceso de vehículos y la señalización de la zona de boxes.",
-      "Durante la ejecución de las obras la pista permanece abierta para socios en el horario habitual. Los trabajos se concentran en el perímetro exterior, por lo que no afectan a la zona de boxes ni al pit lane.",
-      "Con el cerramiento terminado, el club podrá abrir la instalación al público general y poner en marcha la tarifa de día completo para visitantes.",
-    ],
-  },
+  ayuntamientoCesionPost,
   {
     slug: "resultados-social-octubre",
     date: "2026-10-26",

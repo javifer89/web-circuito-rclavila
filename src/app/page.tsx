@@ -14,10 +14,10 @@ import vistaAerea from "@/assets/vista aerea circuito.jpeg";
 export const ensureStatic = "navigation";
 
 const heroStats = [
-  { value: "1.250 m²", label: "de pista" },
-  { value: "4", label: "categorías" },
-  { value: "7 días", label: "acceso socios" },
-  { value: "AMB", label: "cronometraje" },
+  { value: "3000 m² parcela", label: "superficie" },
+  { value: "3 escalas", label: "escalas" },
+  { value: "llave propia", label: "acceso" },
+  { value: "LAPMONITOR", label: "cronometraje" },
 ];
 
 export default function HomePage() {
@@ -107,10 +107,10 @@ export default function HomePage() {
             </p>
             <ul className="mt-8 space-y-3">
               {[
-                "Firme de tierra con riego automático y mantenimiento semanal.",
-                "Pit lane elevado para no cortar el paso a los coches en pista.",
-                "Iluminación en pista y boxes: se puede entrenar de noche.",
-                "Cronometraje AMB / MyLaps en todas las pruebas del club.",
+                "Firme de tierra con moqueta en zonas de saltos y recepciones.",
+                "Pit lane en mejora: expansión de mesas de boxes.",
+                "Sin iluminación artificial (entrenamiento diurno).",
+                "Cronometraje LAPMONITOR — cada piloto su transponder.",
               ].map((item) => (
                 <li key={item} className="flex gap-3 text-sm leading-relaxed text-muted">
                   <span className="mt-2 h-1 w-4 shrink-0 bg-accent" aria-hidden="true" />
@@ -118,6 +118,9 @@ export default function HomePage() {
                 </li>
               ))}
             </ul>
+            <p className="mt-4 text-sm text-muted">
+              Mejoras en curso: vallado perimetral, aumento de mesas de boxes y zona de sombra prevista.
+            </p>
             <ButtonLink href="/el-circuito" variant="ghost" className="mt-8 px-0">
               Ficha técnica completa <ArrowRight />
             </ButtonLink>
@@ -173,7 +176,7 @@ export default function HomePage() {
         />
 
         <div className="mt-12 border-t border-line">
-          {nextEvents.map((event) => {
+          {nextEvents.length > 0 ? (nextEvents.map((event) => {
             const date = eventDayMonth(event.date);
             const type = eventTypes[event.type];
             return (
@@ -206,11 +209,15 @@ export default function HomePage() {
                 </div>
               </article>
             );
-          })}
-        </div>
-      </Section>
-
-      {/* Noticias */}
+          })) : (
+          <div className="mt-12 text-center py-8">
+            <p className="text-muted/60">Ahora mismo no hay pruebas programadas.</p>
+            <p className="mt-4 text-dust/70">Cuando el club convoque la primera, la verás aquí y en el calendario.</p>
+            <ButtonLink href="/calendario" variant="outline">
+              Ver calendario
+            </ButtonLink>
+          </div>
+        )}
       <Section className="border-t border-line bg-surface/60">
         <SectionHeading
           eyebrow="Noticias"
@@ -261,8 +268,8 @@ export default function HomePage() {
               Solo falta tu coche.
             </h2>
             <p className="mt-3 max-w-xl text-sm leading-relaxed text-asphalt/80">
-              Cuota mensual desde 15 €. Acceso con llave propia, entrenamiento libre y participación
-              en las pruebas sociales del club.
+              Cuota mensual desde 10 €, semestral 60 € o anual 120 €. Acceso con llave propia
+              para socios; usuarios externos por día, previo contacto con el club.
             </p>
           </div>
           <div className="flex shrink-0 flex-col gap-3 sm:flex-row">
@@ -303,7 +310,7 @@ export default function HomePage() {
                   Dirección
                 </dt>
                 <dd className="mt-1 text-sm text-dust">
-                  {site.address.street}, {site.address.postalCode} {site.address.town}
+                  Partida Atalayas, s/n — Villajoyosa (Alicante)
                 </dd>
               </div>
               <div>
@@ -311,11 +318,7 @@ export default function HomePage() {
                   Horario
                 </dt>
                 <dd className="mt-1 space-y-1 text-sm text-dust">
-                  {site.hours.map((item) => (
-                    <span key={item.days} className="block">
-                      {item.days}: {item.time}
-                    </span>
-                  ))}
+                  Contactar para más información
                 </dd>
               </div>
             </dl>
@@ -328,11 +331,16 @@ export default function HomePage() {
             </div>
           </div>
 
-          <MediaPlaceholder
-            label="Mapa de ubicación"
-            note="Se sustituye por el mapa embebido real"
-            ratio="aspect-[4/3]"
-          />
+          <iframe
+              src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d322.85825396956795!2d-0.18863109984290002!3d38.52485821506854!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1ses!2ses!4v1794780048269!5m2!1ses!2ses"
+              style="border:0;"
+              width="100%"
+              height="450"
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="strict-origin-when-cross-origin"
+              title="Ubicación del circuito RC La Vila en Villajoyosa"
+            />
         </div>
       </Section>
     </>

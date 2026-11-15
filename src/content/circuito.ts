@@ -48,23 +48,18 @@ export const facilities = [
 
 export const classes = [
   {
-    name: "Buggy 1/8",
-    engine: "Nitro y eléctrico",
-    note: "La categoría reina del club. Alta participación en las pruebas sociales.",
+    name: "1/10 TT",
+    engine: "Buggy y Truggy",
+    note: "La categoría de iniciación sobre asfalto/tierra. Coches accesibles y carreras ajustadas.",
   },
   {
-    name: "Truggy 1/8",
-    engine: "Nitro y eléctrico",
-    note: "Vía ancha, estable y muy resistente. Ideal para iniciarse en 1/8.",
-  },
-  {
-    name: "Short Course 1/10",
-    engine: "Eléctrico",
-    note: "La puerta de entrada. Coches accesibles y carreras muy ajustadas.",
-  },
-  {
-    name: "E-buggy 1/8",
+    name: "1/8 TT eco",
     engine: "Eléctrico",
     note: "Cero ruido y menos mantenimiento. Buena opción para entrenar entre semana.",
+  },
+  {
+    name: "1/8 TT gas",
+    engine: "Nitro y eléctrico",
+    note: "La categoría reina del club. Alta participación en las pruebas sociales.",
   },
 ];
