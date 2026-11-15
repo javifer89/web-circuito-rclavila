@@ -176,48 +176,54 @@ export default function HomePage() {
         />
 
         <div className="mt-12 border-t border-line">
-          {nextEvents.length > 0 ? (nextEvents.map((event) => {
-            const date = eventDayMonth(event.date);
-            const type = eventTypes[event.type];
-            return (
-              <article
-                key={event.id}
-                className="group flex flex-col gap-4 border-b border-line py-6 sm:flex-row sm:items-center sm:gap-8"
-              >
-                <div className="flex w-16 shrink-0 items-baseline gap-2 sm:flex-col sm:gap-0">
-                  <span className="display-md text-3xl text-dust">{date.day}</span>
-                  <span className="text-[11px] uppercase tracking-[0.14em] text-muted">
-                    {date.month}
-                  </span>
-                </div>
-
-                <div className="min-w-0 flex-1">
-                  <div className="flex flex-wrap items-center gap-3">
-                    <h3 className="text-base font-semibold text-dust">{event.title}</h3>
-                    <span
-                      className={`border px-2 py-0.5 text-[10px] font-semibold uppercase tracking-[0.12em] ${type.className}`}
-                    >
-                      {type.label}
+          {nextEvents.length > 0 ? (
+            nextEvents.map((event) => {
+              const date = eventDayMonth(event.date);
+              const type = eventTypes[event.type];
+              return (
+                <article
+                  key={event.id}
+                  className="group flex flex-col gap-4 border-b border-line py-6 sm:flex-row sm:items-center sm:gap-8"
+                >
+                  <div className="flex w-16 shrink-0 items-baseline gap-2 sm:flex-col sm:gap-0">
+                    <span className="display-md text-3xl text-dust">{date.day}</span>
+                    <span className="text-[11px] uppercase tracking-[0.14em] text-muted">
+                      {date.month}
                     </span>
                   </div>
-                  <p className="mt-2 text-sm leading-relaxed text-muted">{event.summary}</p>
-                </div>
 
-                <div className="shrink-0 text-sm text-muted sm:text-right">
-                  <p className="text-[11px] uppercase tracking-[0.12em]">Inscripción</p>
-                  <p className="mt-1 text-dust">{event.entry ?? event.status ?? "—"}</p>
-                </div>
-              </article>
-            );
-          })) : (
-          <div className="mt-12 text-center py-8">
-            <p className="text-muted/60">Ahora mismo no hay pruebas programadas.</p>
-            <p className="mt-4 text-dust/70">Cuando el club convoque la primera, la verás aquí y en el calendario.</p>
-            <ButtonLink href="/calendario" variant="outline">
-              Ver calendario
-            </ButtonLink>
-          </div>
-        )}
+                  <div className="min-w-0 flex-1">
+                    <div className="flex flex-wrap items-center gap-3">
+                      <h3 className="text-base font-semibold text-dust">{event.title}</h3>
+                      <span
+                        className={`border px-2 py-0.5 text-[10px] font-semibold uppercase tracking-[0.12em] ${type.className}`}
+                      >
+                        {type.label}
+                      </span>
+                    </div>
+                    <p className="mt-2 text-sm leading-relaxed text-muted">{event.summary}</p>
+                  </div>
+
+                  <div className="shrink-0 text-sm text-muted sm:text-right">
+                    <p className="text-[11px] uppercase tracking-[0.12em]">Inscripción</p>
+                    <p className="mt-1 text-dust">{event.entry ?? event.status ?? "—"}</p>
+                  </div>
+                </article>
+              );
+            })
+          ) : (
+            <div className="mt-12 text-center py-8">
+              <p className="text-muted/60">Ahora mismo no hay pruebas programadas.</p>
+              <p className="mt-4 text-dust/70">Cuando el club convoque la primera, la verás aquí y en el calendario.</p>
+              <ButtonLink href="/calendario" variant="outline">
+                Ver calendario
+              </ButtonLink>
+            </div>
+          )}
+        </div>
+      </Section>
+
+      {/* Noticias */}
       <Section className="border-t border-line bg-surface/60">
         <SectionHeading
           eyebrow="Noticias"
@@ -300,8 +306,8 @@ export default function HomePage() {
               A cinco minutos de la costa
             </h2>
             <p className="mt-5 text-base leading-relaxed text-muted">
-              La parcela está en el término de {site.address.town}, con acceso para coche y
-              remolque y aparcamiento dentro del recinto.
+              La parcela está en Partida Atalayas, Villajoyosa (Alicante), frente al Centro
+              Ocupacional Les Talaies. Acceso para coche y remolque, aparcamiento dentro del recinto.
             </p>
 
             <dl className="mt-8 space-y-5">
@@ -317,7 +323,7 @@ export default function HomePage() {
                 <dt className="text-[11px] font-semibold uppercase tracking-[0.14em] text-muted">
                   Horario
                 </dt>
-                <dd className="mt-1 space-y-1 text-sm text-dust">
+                <dd className="mt-1 text-sm text-dust">
                   Contactar para más información
                 </dd>
               </div>
@@ -325,15 +331,18 @@ export default function HomePage() {
 
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <ButtonLink href="/contacto">Contacto y ubicación</ButtonLink>
-              <ButtonLink href={whatsappUrl()} variant="outline" external>
-                Escribir por WhatsApp
-              </ButtonLink>
+              <a
+                href="https://www.instagram.com/rclavila"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center border border-asphalt/30 px-7 py-4 text-[12px] font-semibold uppercase tracking-[0.12em] text-asphalt transition-colors hover:border-asphalt"
+              >
+                Instagram
+              </a>
             </div>
-          </div>
 
-          <iframe
+            <iframe
               src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d322.85825396956795!2d-0.18863109984290002!3d38.52485821506854!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1ses!2ses!4v1794780048269!5m2!1ses!2ses"
-              style="border:0;"
               width="100%"
               height="450"
               allowFullScreen
@@ -341,6 +350,7 @@ export default function HomePage() {
               referrerPolicy="strict-origin-when-cross-origin"
               title="Ubicación del circuito RC La Vila en Villajoyosa"
             />
+          </div>
         </div>
       </Section>
     </>
