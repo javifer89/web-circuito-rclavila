@@ -80,12 +80,12 @@ export default function HomePage() {
                 className="h-full w-full object-cover object-center"
               />
             </div>
-            <div className="absolute -bottom-4 -left-4 hidden bg-accent px-4 py-3 sm:block">
+            {/* <div className="absolute -bottom-4 -left-4 hidden bg-accent px-4 py-3 sm:block">
               <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-asphalt">
                 Acceso con llave
               </p>
               <p className="display-md text-lg text-asphalt">Todos los días</p>
-            </div>
+            </div> */}
           </div>
         </Container>
       </section>
