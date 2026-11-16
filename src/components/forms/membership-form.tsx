@@ -18,7 +18,7 @@ type FormValues = {
   consent: boolean;
 };
 
-export function MembershipForm({ formMode = "mailto", formspreeId }: { formMode?: FormMode; formspreeId?: string }) {
+export function MembershipForm({ formMode = "formspree", formspreeId = "xkjrjlrk" }: { formMode?: FormMode; formspreeId?: string }) {
   const [values, setValues] = useState<FormValues>({
     firstName: "",
     lastName: "",
@@ -58,6 +58,7 @@ export function MembershipForm({ formMode = "mailto", formspreeId }: { formMode?
       })
       .then(response => {
         if (response.ok) {
+          // Éxito - resetear formulario
           setValues({
             firstName: "",
             lastName: "",
@@ -70,6 +71,8 @@ export function MembershipForm({ formMode = "mailto", formspreeId }: { formMode?
             notes: "",
             consent: false,
           });
+        } else {
+          throw new Error("Error al enviar");
         }
       })
       .catch(error => {
@@ -79,27 +82,30 @@ export function MembershipForm({ formMode = "mailto", formspreeId }: { formMode?
     }
 
     // Modo mailto (original)
-    const fullName = `${values.firstName} ${values.lastName}`.trim();
-    
-    const mailto = `
-      subject: Alta de socio · ${fullName}
-      lines: [
-        ["Nombre", fullName],
-        ["Email", values.email],
-        ["Teléfono", values.phone],
-        ["Fecha de nacimiento", values.birthDate],
-        ["Categoría", values.category],
-        ["Modalidad de cuota", values.modality],
-        ["Forma de pago preferida", values.payment],
-      ],
-      "",
-      "Comentarios:",
-      values.notes || "—",
-      "",
-      "Solicito el alta como socio del club y declaro haber leído el reglamento interno.",
-    `;
+    if (formMode === "mailto") {
+      const fullName = `${values.firstName} ${values.lastName}`.trim();
+      
+      const mailto = `
+        subject: Alta de socio · ${fullName}
+        lines: [
+          ["Nombre", fullName],
+          ["Email", values.email],
+          ["Teléfono", values.phone],
+          ["Fecha de nacimiento", values.birthDate],
+          ["Categoría", values.category],
+          ["Modalidad de cuota", values.modality],
+          ["Forma de pago preferida", values.payment],
+        ],
+        "",
+        "Comentarios:",
+        values.notes || "—",
+        "",
+        "Solicito el alta como socio del club y declaro haber leído el reglamento interno.",
+      `;
 
-    window.location.href = `mailto:${site.contact.email}?${encodeURIComponent(mailto)}`;
+      window.location.href = `mailto:${site.contact.email}?${encodeURIComponent(mailto)}`;
+      return;
+    }
   }
 
   return (
@@ -270,20 +276,16 @@ export function MembershipForm({ formMode = "mailto", formspreeId }: { formMode?
           type="submit"
           className="flex-1 bg-accent text-asphalt py-3 px-6 text-sm font-semibold uppercase tracking-[0.12em] transition-colors hover:bg-accent-soft"
         >
-          {formMode === "formspree" && formspreeId
-            ? "Enviar a formspree"
-            : "Preparar solicitud"}
+          Enviar solicitud
         </button>
-        {formMode === "formspree" && formspreeId && (
-          <a
-            href={whatsappUrl(`Hola, quiero hacerme socio. Nombre: ${values.firstName} ${values.lastName}. Categoría: ${values.category}. Modalidad: ${values.modality}. Email: ${values.email} · Tel: ${values.phone}`)}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="border border-asphalt/30 px-6 py-3 text-sm font-semibold uppercase tracking-[0.12em] text-asphalt transition-colors hover:border-asphalt"
-          >
-            WhatsApp
-          </a>
-        )}
+        <a
+          href={whatsappUrl(`Hola, quiero hacerme socio.`)}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="border border-asphalt/30 px-6 py-3 text-sm font-semibold uppercase tracking-[0.12em] text-asphalt transition-colors hover:border-asphalt"
+        >
+          WhatsApp
+        </a>
       </div>
     </form>
   );

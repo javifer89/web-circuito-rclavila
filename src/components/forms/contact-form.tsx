@@ -14,7 +14,7 @@ type FormValues = {
   consent: boolean;
 };
 
-export function ContactForm({ formMode = "mailto", formspreeId }: { formMode?: FormMode; formspreeId?: string }) {
+export function ContactForm({ formMode = "formspree", formspreeId = "xppdpgdo" }: { formMode?: FormMode; formspreeId?: string }) {
   const [values, setValues] = useState<FormValues>({
     name: "",
     email: "",
@@ -32,18 +32,15 @@ export function ContactForm({ formMode = "mailto", formspreeId }: { formMode?: F
     event.preventDefault();
     
     if (!values.consent) {
-      // Marcar consent como falso si no está marcado
       update("consent", false);
       return;
     }
 
     // Modo formspree
     if (formMode === "formspree" && formspreeId) {
-      // Crear form data y enviarlo a formspree
       const formData = new FormData(event.target as HTMLFormElement);
       const data = Object.fromEntries(formData.entries());
       
-      // Enviar a formspree
       fetch(`https://formspree.io/${formspreeId}`, {
         method: "POST",
         body: formData,
@@ -53,7 +50,7 @@ export function ContactForm({ formMode = "mailto", formspreeId }: { formMode?: F
       })
       .then(response => {
         if (response.ok) {
-          // Éxito - podría resetear el formulario o mostrar mensaje
+          // Éxito - resetear formulario
           setValues({
             name: "",
             email: "",
@@ -73,21 +70,23 @@ export function ContactForm({ formMode = "mailto", formspreeId }: { formMode?: F
     }
 
     // Modo mailto (original)
-    const mailto = `
-      subject: Web · ${values.topic} · ${values.name}
-      lines: [
-        ["Nombre", values.name],
-        ["Email", values.email],
-        ["Teléfono", values.phone],
-        ["Asunto", values.topic],
-      ],
-      "",
-      "Mensaje:",
-      values.message
-    `;
+    if (formMode === "mailto") {
+      const mailto = `
+        subject: Web · ${values.topic} · ${values.name}
+        lines: [
+          ["Nombre", values.name],
+          ["Email", values.email],
+          ["Teléfono", values.phone],
+          ["Asunto", values.topic],
+        ],
+        "",
+        "Mensaje:",
+        values.message
+      `;
 
-    // Abrir cliente de correo
-    window.location.href = `mailto:${site.contact.email}?${encodeURIComponent(mailto)}`;
+      window.location.href = `mailto:${site.contact.email}?${encodeURIComponent(mailto)}`;
+      return;
+    }
   }
 
   return (
@@ -195,22 +194,16 @@ export function ContactForm({ formMode = "mailto", formspreeId }: { formMode?: F
           type="submit"
           className="flex-1 bg-accent text-asphalt py-3 px-6 text-sm font-semibold uppercase tracking-[0.12em] transition-colors hover:bg-accent-soft"
         >
-          {formMode === "formspree" && formspreeId 
-            ? "Enviar a formspree" 
-            : "Preparar mensaje"}
+          Enviar formulario
         </button>
-        {formMode === "formspree" && formspreeId && (
-          <a
-            href={whatsappUrl(`Hola, soy ${values.name}. Asunto: ${values.topic}. ${values.message} — Email: ${values.email}${
-              values.phone ? ` · Tel: ${values.phone}` : ""
-            }`)}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="border border-asphalt/30 px-6 py-3 text-sm font-semibold uppercase tracking-[0.12em] text-asphalt transition-colors hover:border-asphalt"
-          >
-            WhatsApp
-          </a>
-        )}
+        <a
+          href={whatsappUrl("Hola, consultas del sitio web.")}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="border border-asphalt/30 px-6 py-3 text-sm font-semibold uppercase tracking-[0.12em] text-asphalt transition-colors hover:border-asphalt"
+        >
+          WhatsApp
+        </a>
       </div>
     </form>
   );
