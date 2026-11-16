@@ -2,165 +2,218 @@
 
 import { useState } from "react";
 import { site, whatsappUrl } from "@/content/site";
-import { buildMailto, formatFields } from "@/lib/mailto";
-import { ConsentField, Field, FormHandoff, inputClass } from "./fields";
 
-const topics = [
-  "Información general",
-  "Quiero hacerme socio",
-  "Alquiler de pista",
-  "Eventos y carreras",
-  "Prensa y colaboraciones",
-] as const;
+type FormMode = "mailto" | "formspree";
 
-type Prepared = { mailto: string; whatsapp: string } | null;
+type FormValues = {
+  name: string;
+  email: string;
+  phone: string;
+  topic: string;
+  message: string;
+  consent: boolean;
+};
 
-export function ContactForm() {
-  const [prepared, setPrepared] = useState<Prepared>(null);
-  const [consent, setConsent] = useState(false);
-  const [values, setValues] = useState({
+export function ContactForm({ formMode = "mailto", formspreeId }: { formMode?: FormMode; formspreeId?: string }) {
+  const [values, setValues] = useState<FormValues>({
     name: "",
     email: "",
     phone: "",
-    topic: topics[0] as string,
+    topic: "Información general",
     message: "",
+    consent: false,
   });
 
-  function update<K extends keyof typeof values>(key: K, value: string) {
+  function update<K extends keyof FormValues>(key: K, value: string | boolean) {
     setValues((current) => ({ ...current, [key]: value }));
   }
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    if (!consent) return;
+    
+    if (!values.consent) {
+      // Marcar consent como falso si no está marcado
+      update("consent", false);
+      return;
+    }
 
-    const mailto = buildMailto({
-      to: site.contact.email,
-      subject: `Web · ${values.topic} · ${values.name}`,
+    // Modo formspree
+    if (formMode === "formspree" && formspreeId) {
+      // Crear form data y enviarlo a formspree
+      const formData = new FormData(event.target as HTMLFormElement);
+      const data = Object.fromEntries(formData.entries());
+      
+      // Enviar a formspree
+      fetch(`https://formspree.io/${formspreeId}`, {
+        method: "POST",
+        body: formData,
+        headers: {
+          "Accept": "application/json"
+        }
+      })
+      .then(response => {
+        if (response.ok) {
+          // Éxito - podría resetear el formulario o mostrar mensaje
+          setValues({
+            name: "",
+            email: "",
+            phone: "",
+            topic: "Información general",
+            message: "",
+            consent: false,
+          });
+        } else {
+          throw new Error("Error al enviar");
+        }
+      })
+      .catch(error => {
+        console.error("Error enviando a formspree:", error);
+      });
+      return;
+    }
+
+    // Modo mailto (original)
+    const mailto = `
+      subject: Web · ${values.topic} · ${values.name}
       lines: [
-        ...formatFields([
-          ["Nombre", values.name],
-          ["Email", values.email],
-          ["Teléfono", values.phone],
-          ["Asunto", values.topic],
-        ]),
-        "",
-        "Mensaje:",
-        values.message,
+        ["Nombre", values.name],
+        ["Email", values.email],
+        ["Teléfono", values.phone],
+        ["Asunto", values.topic],
       ],
-    });
+      "",
+      "Mensaje:",
+      values.message
+    `;
 
-    setPrepared({
-      mailto,
-      whatsapp: whatsappUrl(
-        `Hola, soy ${values.name}. Asunto: ${values.topic}. ${values.message} — Email: ${values.email}${
-          values.phone ? ` · Tel: ${values.phone}` : ""
-        }`,
-      ),
-    });
-  }
-
-  if (prepared) {
-    return (
-      <FormHandoff
-        mailtoHref={prepared.mailto}
-        whatsappHref={prepared.whatsapp}
-        onReset={() => setPrepared(null)}
-      />
-    );
+    // Abrir cliente de correo
+    window.location.href = `mailto:${site.contact.email}?${encodeURIComponent(mailto)}`;
   }
 
   return (
-    <form onSubmit={handleSubmit} className="grid gap-5">
+    <form onSubmit={handleSubmit} className="grid gap-5" autoComplete="off">
       <div className="grid gap-5 sm:grid-cols-2">
-        <Field label="Nombre" htmlFor="contact-name" required>
+        <div>
+          <label className="block text-sm font-medium text-dust mb-2">
+            Nombre y apellidos
+          </label>
           <input
-            id="contact-name"
+            type="text"
             name="name"
             required
-            autoComplete="name"
             value={values.name}
-            onChange={(event) => update("name", event.target.value)}
-            className={inputClass}
+            onChange={(e) => update("name", e.target.value)}
+            className="w-full px-4 py-3 border border-line rounded-md focus:outline-none focus:border-accent"
             placeholder="Nombre y apellidos"
+            autoComplete="name"
           />
-        </Field>
+        </div>
 
-        <Field label="Email" htmlFor="contact-email" required>
+        <div>
+          <label className="block text-sm font-medium text-dust mb-2">
+            Email
+          </label>
           <input
-            id="contact-email"
-            name="email"
             type="email"
+            name="email"
             required
-            autoComplete="email"
             value={values.email}
-            onChange={(event) => update("email", event.target.value)}
-            className={inputClass}
+            onChange={(e) => update("email", e.target.value)}
+            className="w-full px-4 py-3 border border-line rounded-md focus:outline-none focus:border-accent"
             placeholder="tu@email.com"
+            autoComplete="email"
           />
-        </Field>
+        </div>
 
-        <Field label="Teléfono" htmlFor="contact-phone">
+        <div>
+          <label className="block text-sm font-medium text-dust mb-2">
+            Teléfono
+          </label>
           <input
-            id="contact-phone"
-            name="phone"
             type="tel"
-            autoComplete="tel"
+            name="phone"
             value={values.phone}
-            onChange={(event) => update("phone", event.target.value)}
-            className={inputClass}
+            onChange={(e) => update("phone", e.target.value)}
+            className="w-full px-4 py-3 border border-line rounded-md focus:outline-none focus:border-accent"
             placeholder="600 000 000"
+            autoComplete="tel"
           />
-        </Field>
+        </div>
 
-        <Field label="Asunto" htmlFor="contact-topic" required>
+        <div>
+          <label className="block text-sm font-medium text-dust mb-2">
+            Asunto
+          </label>
           <select
-            id="contact-topic"
             name="topic"
             required
             value={values.topic}
-            onChange={(event) => update("topic", event.target.value)}
-            className={inputClass}
+            onChange={(e) => update("topic", e.target.value)}
+            className="w-full px-4 py-3 border border-line rounded-md focus:outline-none focus:border-accent"
           >
-            {topics.map((topic) => (
-              <option key={topic} value={topic}>
-                {topic}
-              </option>
-            ))}
+            <option value="Información general">Información general</option>
+            <option value="Quiero hacerme socio">Quiero hacerme socio</option>
+            <option value="Alquiler de pista">Alquiler de pista</option>
+            <option value="Eventos y carreras">Eventos y carreras</option>
+            <option value="Prensa y colaboraciones">Prensa y colaboraciones</option>
           </select>
-        </Field>
+        </div>
       </div>
 
-      <Field label="Mensaje" htmlFor="contact-message" required>
-        <textarea
-          id="contact-message"
-          name="message"
-          required
-          rows={5}
-          value={values.message}
-          onChange={(event) => update("message", event.target.value)}
-          className={inputClass}
-          placeholder="Cuéntanos qué necesitas."
-        />
-      </Field>
-
-      <ConsentField id="contact-consent" checked={consent} onChange={setConsent}>
-        He leído y acepto la{" "}
-        <a href="/legal#privacidad" className="text-dust underline underline-offset-2">
-          política de privacidad
-        </a>
-        . Los datos se utilizan únicamente para responder a esta consulta.
-      </ConsentField>
-
       <div>
+        <label className="block text-sm font-medium text-dust mb-2">
+          Mensaje
+        </label>
+        <textarea
+          name="message"
+          rows={5}
+          required
+          value={values.message}
+          onChange={(e) => update("message", e.target.value)}
+          className="w-full px-4 py-3 border border-line rounded-md focus:outline-none focus:border-accent"
+          placeholder="Cuéntanos qué necesitas..."
+        ></textarea>
+      </div>
+
+      <div className="mt-4 flex items-start">
+        <div className="flex items-center gap-2">
+          <input
+            type="checkbox"
+            name="consent"
+            checked={values.consent}
+            onChange={(e) => update("consent", e.target.checked)}
+            className="w-4 h-4 rounded border-accent focus:ring-accent"
+          />
+          <span className="text-sm text-dust">
+            He leído y acepto la política de privacidad
+          </span>
+        </div>
+      </div>
+
+      <div className="mt-6 flex gap-3">
         <button
           type="submit"
-          disabled={!consent}
-          className="inline-flex items-center justify-center bg-accent px-8 py-4 text-[12px] font-semibold uppercase tracking-[0.12em] text-asphalt transition-colors hover:bg-accent-soft disabled:cursor-not-allowed disabled:border disabled:border-line disabled:bg-transparent disabled:text-muted"
+          className="flex-1 bg-accent text-asphalt py-3 px-6 text-sm font-semibold uppercase tracking-[0.12em] transition-colors hover:bg-accent-soft"
         >
-          Preparar mensaje
+          {formMode === "formspree" && formspreeId 
+            ? "Enviar a formspree" 
+            : "Preparar mensaje"}
         </button>
+        {formMode === "formspree" && formspreeId && (
+          <a
+            href={whatsappUrl(`Hola, soy ${values.name}. Asunto: ${values.topic}. ${values.message} — Email: ${values.email}${
+              values.phone ? ` · Tel: ${values.phone}` : ""
+            }`)}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="border border-asphalt/30 px-6 py-3 text-sm font-semibold uppercase tracking-[0.12em] text-asphalt transition-colors hover:border-asphalt"
+          >
+            WhatsApp
+          </a>
+        )}
       </div>
     </form>
   );
 }
+
+export default ContactForm;

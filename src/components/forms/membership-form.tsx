@@ -2,236 +2,291 @@
 
 import { useState } from "react";
 import { site, whatsappUrl } from "@/content/site";
-import { buildMailto, formatFields } from "@/lib/mailto";
-import { ConsentField, Field, FormHandoff, inputClass } from "./fields";
 
-const modalities = ["Cuota mensual", "Cuota trimestral", "Cuota juvenil"] as const;
-const categories = [
-  "Buggy 1/8",
-  "Truggy 1/8",
-  "Short course 1/10",
-  "E-buggy 1/8",
-  "Todavía no compito",
-] as const;
-const paymentMethods = ["Transferencia", "Domiciliación bancaria", "Efectivo en secretaría"] as const;
+type FormMode = "mailto" | "formspree";
 
-type Prepared = { mailto: string; whatsapp: string } | null;
+type FormValues = {
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string;
+  birthDate: string;
+  category: string;
+  modality: string;
+  payment: string;
+  notes: string;
+  consent: boolean;
+};
 
-export function MembershipForm() {
-  const [prepared, setPrepared] = useState<Prepared>(null);
-  const [consent, setConsent] = useState(false);
-  const [values, setValues] = useState({
+export function MembershipForm({ formMode = "mailto", formspreeId }: { formMode?: FormMode; formspreeId?: string }) {
+  const [values, setValues] = useState<FormValues>({
     firstName: "",
     lastName: "",
     email: "",
     phone: "",
     birthDate: "",
-    category: categories[0] as string,
-    modality: modalities[0] as string,
-    payment: paymentMethods[0] as string,
+    category: "Buggy 1/8",
+    modality: "Cuota mensual",
+    payment: "Transferencia",
     notes: "",
+    consent: false,
   });
 
-  function update<K extends keyof typeof values>(key: K, value: string) {
+  function update<K extends keyof FormValues>(key: K, value: string | boolean) {
     setValues((current) => ({ ...current, [key]: value }));
   }
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    if (!consent) return;
+    
+    if (!values.consent) {
+      update("consent", false);
+      return;
+    }
 
+    // Modo formspree
+    if (formMode === "formspree" && formspreeId) {
+      const formData = new FormData(event.target as HTMLFormElement);
+      const data = Object.fromEntries(formData.entries());
+      
+      fetch(`https://formspree.io/${formspreeId}`, {
+        method: "POST",
+        body: formData,
+        headers: {
+          "Accept": "application/json"
+        }
+      })
+      .then(response => {
+        if (response.ok) {
+          setValues({
+            firstName: "",
+            lastName: "",
+            email: "",
+            phone: "",
+            birthDate: "",
+            category: "Buggy 1/8",
+            modality: "Cuota mensual",
+            payment: "Transferencia",
+            notes: "",
+            consent: false,
+          });
+        }
+      })
+      .catch(error => {
+        console.error("Error enviando a formspree:", error);
+      });
+      return;
+    }
+
+    // Modo mailto (original)
     const fullName = `${values.firstName} ${values.lastName}`.trim();
-
-    const mailto = buildMailto({
-      to: site.contact.email,
-      subject: `Alta de socio · ${fullName}`,
+    
+    const mailto = `
+      subject: Alta de socio · ${fullName}
       lines: [
-        ...formatFields([
-          ["Nombre", fullName],
-          ["Email", values.email],
-          ["Teléfono", values.phone],
-          ["Fecha de nacimiento", values.birthDate],
-          ["Categoría", values.category],
-          ["Modalidad de cuota", values.modality],
-          ["Forma de pago preferida", values.payment],
-        ]),
-        "",
-        "Comentarios:",
-        values.notes || "—",
-        "",
-        "Solicito el alta como socio del club y declaro haber leído el reglamento interno.",
+        ["Nombre", fullName],
+        ["Email", values.email],
+        ["Teléfono", values.phone],
+        ["Fecha de nacimiento", values.birthDate],
+        ["Categoría", values.category],
+        ["Modalidad de cuota", values.modality],
+        ["Forma de pago preferida", values.payment],
       ],
-    });
+      "",
+      "Comentarios:",
+      values.notes || "—",
+      "",
+      "Solicito el alta como socio del club y declaro haber leído el reglamento interno.",
+    `;
 
-    setPrepared({
-      mailto,
-      whatsapp: whatsappUrl(
-        `Hola, quiero hacerme socio. Nombre: ${fullName}. Categoría: ${values.category}. Modalidad: ${values.modality}. Email: ${values.email} · Tel: ${values.phone}`,
-      ),
-    });
-  }
-
-  if (prepared) {
-    return (
-      <FormHandoff
-        mailtoHref={prepared.mailto}
-        whatsappHref={prepared.whatsapp}
-        onReset={() => setPrepared(null)}
-      />
-    );
+    window.location.href = `mailto:${site.contact.email}?${encodeURIComponent(mailto)}`;
   }
 
   return (
-    <form onSubmit={handleSubmit} className="grid gap-5">
+    <form onSubmit={handleSubmit} className="grid gap-5" autoComplete="off">
       <div className="grid gap-5 sm:grid-cols-2">
-        <Field label="Nombre" htmlFor="member-first-name" required>
+        <div>
+          <label className="block text-sm font-medium text-dust mb-2">
+            Nombre
+          </label>
           <input
-            id="member-first-name"
+            type="text"
+            name="firstName"
             required
-            autoComplete="given-name"
             value={values.firstName}
-            onChange={(event) => update("firstName", event.target.value)}
-            className={inputClass}
+            onChange={(e) => update("firstName", e.target.value)}
+            className="w-full px-4 py-3 border border-line rounded-md focus:outline-none focus:border-accent"
             placeholder="Nombre"
+            autoComplete="given-name"
           />
-        </Field>
+        </div>
 
-        <Field label="Apellidos" htmlFor="member-last-name" required>
+        <div>
+          <label className="block text-sm font-medium text-dust mb-2">
+            Apellidos
+          </label>
           <input
-            id="member-last-name"
+            type="text"
+            name="lastName"
             required
-            autoComplete="family-name"
             value={values.lastName}
-            onChange={(event) => update("lastName", event.target.value)}
-            className={inputClass}
+            onChange={(e) => update("lastName", e.target.value)}
+            className="w-full px-4 py-3 border border-line rounded-md focus:outline-none focus:border-accent"
             placeholder="Apellidos"
+            autoComplete="family-name"
           />
-        </Field>
+        </div>
 
-        <Field label="Email" htmlFor="member-email" required>
+        <div>
+          <label className="block text-sm font-medium text-dust mb-2">
+            Email
+          </label>
           <input
-            id="member-email"
             type="email"
+            name="email"
             required
-            autoComplete="email"
             value={values.email}
-            onChange={(event) => update("email", event.target.value)}
-            className={inputClass}
+            onChange={(e) => update("email", e.target.value)}
+            className="w-full px-4 py-3 border border-line rounded-md focus:outline-none focus:border-accent"
             placeholder="tu@email.com"
+            autoComplete="email"
           />
-        </Field>
+        </div>
 
-        <Field label="Teléfono" htmlFor="member-phone" required>
+        <div>
+          <label className="block text-sm font-medium text-dust mb-2">
+            Teléfono
+          </label>
           <input
-            id="member-phone"
             type="tel"
-            required
-            autoComplete="tel"
+            name="phone"
             value={values.phone}
-            onChange={(event) => update("phone", event.target.value)}
-            className={inputClass}
+            onChange={(e) => update("phone", e.target.value)}
+            className="w-full px-4 py-3 border border-line rounded-md focus:outline-none focus:border-accent"
             placeholder="600 000 000"
+            autoComplete="tel"
           />
-        </Field>
+        </div>
 
-        <Field label="Fecha de nacimiento" htmlFor="member-birth" required>
+        <div>
+          <label className="block text-sm font-medium text-dust mb-2">
+            Fecha de nacimiento
+          </label>
           <input
-            id="member-birth"
             type="date"
+            name="birthDate"
             required
             value={values.birthDate}
-            onChange={(event) => update("birthDate", event.target.value)}
-            className={inputClass}
+            onChange={(e) => update("birthDate", e.target.value)}
+            className="w-full px-4 py-3 border border-line rounded-md focus:outline-none focus:border-accent"
           />
-        </Field>
+        </div>
 
-        <Field label="Categoría" htmlFor="member-category" required>
+        <div>
+          <label className="block text-sm font-medium text-dust mb-2">
+            Categoría
+          </label>
           <select
-            id="member-category"
+            name="category"
             required
             value={values.category}
-            onChange={(event) => update("category", event.target.value)}
-            className={inputClass}
+            onChange={(e) => update("category", e.target.value)}
+            className="w-full px-4 py-3 border border-line rounded-md focus:outline-none focus:border-accent"
           >
-            {categories.map((category) => (
-              <option key={category} value={category}>
-                {category}
-              </option>
-            ))}
+            <option value="Buggy 1/8">Buggy 1/8</option>
+            <option value="Truggy 1/8">Truggy 1/8</option>
+            <option value="Short course 1/10">Short course 1/10</option>
+            <option value="E-buggy 1/8">E-buggy 1/8</option>
+            <option value="Todavía no compito">Todavía no compito</option>
           </select>
-        </Field>
+        </div>
 
-        <Field label="Modalidad de cuota" htmlFor="member-modality" required>
+        <div>
+          <label className="block text-sm font-medium text-dust mb-2">
+            Modalidad de cuota
+          </label>
           <select
-            id="member-modality"
+            name="modality"
             required
             value={values.modality}
-            onChange={(event) => update("modality", event.target.value)}
-            className={inputClass}
+            onChange={(e) => update("modality", e.target.value)}
+            className="w-full px-4 py-3 border border-line rounded-md focus:outline-none focus:border-accent"
           >
-            {modalities.map((modality) => (
-              <option key={modality} value={modality}>
-                {modality}
-              </option>
-            ))}
+            <option value="Cuota mensual">Cuota mensual</option>
+            <option value="Cuota trimestral">Cuota trimestral</option>
+            <option value="Cuota juvenil">Cuota juvenil</option>
           </select>
-        </Field>
+        </div>
 
-        <Field
-          label="Forma de pago preferida"
-          htmlFor="member-payment"
-          required
-          hint="La domiciliación y los datos bancarios se formalizan en secretaría."
-        >
+        <div>
+          <label className="block text-sm font-medium text-dust mb-2">
+            Forma de pago preferida
+          </label>
           <select
-            id="member-payment"
+            name="payment"
             required
             value={values.payment}
-            onChange={(event) => update("payment", event.target.value)}
-            className={inputClass}
+            onChange={(e) => update("payment", e.target.value)}
+            className="w-full px-4 py-3 border border-line rounded-md focus:outline-none focus:border-accent"
           >
-            {paymentMethods.map((method) => (
-              <option key={method} value={method}>
-                {method}
-              </option>
-            ))}
+            <option value="Transferencia">Transferencia</option>
+            <option value="Domiciliación bancaria">Domiciliación bancaria</option>
+            <option value="Efectivo en secretaría">Efectivo en secretaría</option>
           </select>
-        </Field>
+        </div>
       </div>
 
-      <Field label="Comentarios" htmlFor="member-notes">
+      <div>
+        <label className="block text-sm font-medium text-dust mb-2">
+          Comentarios (opcional)
+        </label>
         <textarea
-          id="member-notes"
+          name="notes"
           rows={4}
           value={values.notes}
-          onChange={(event) => update("notes", event.target.value)}
-          className={inputClass}
-          placeholder="Material que usas, si vienes de otro club, dudas sobre el alta…"
-        />
-      </Field>
+          onChange={(e) => update("notes", e.target.value)}
+          className="w-full px-4 py-3 border border-line rounded-md focus:outline-none focus:border-accent"
+          placeholder="Material que usas, dudas sobre el alta…"
+        ></textarea>
+      </div>
 
-      <ConsentField id="member-consent" checked={consent} onChange={setConsent}>
-        Acepto el{" "}
-        <a href="/el-club#documentos" className="text-dust underline underline-offset-2">
-          reglamento interno
-        </a>{" "}
-        y la{" "}
-        <a href="/legal#privacidad" className="text-dust underline underline-offset-2">
-          política de privacidad
-        </a>
-        . Autorizo al club a usar mis datos para la gestión de la condición de socio.
-      </ConsentField>
+      <div className="mt-4 flex items-start">
+        <div className="flex items-center gap-2">
+          <input
+            type="checkbox"
+            name="consent"
+            checked={values.consent}
+            onChange={(e) => update("consent", e.target.checked)}
+            className="w-4 h-4 rounded border-accent focus:ring-accent"
+          />
+          <span className="text-sm text-dust">
+            Acepto el reglamento interno y la política de privacidad
+          </span>
+        </div>
+      </div>
 
-      <div className="flex flex-wrap items-center gap-4">
+      <div className="mt-6 flex gap-3">
         <button
           type="submit"
-          disabled={!consent}
-          className="inline-flex items-center justify-center bg-accent px-8 py-4 text-[12px] font-semibold uppercase tracking-[0.12em] text-asphalt transition-colors hover:bg-accent-soft disabled:cursor-not-allowed disabled:border disabled:border-line disabled:bg-transparent disabled:text-muted"
+          className="flex-1 bg-accent text-asphalt py-3 px-6 text-sm font-semibold uppercase tracking-[0.12em] transition-colors hover:bg-accent-soft"
         >
-          Preparar solicitud
+          {formMode === "formspree" && formspreeId
+            ? "Enviar a formspree"
+            : "Preparar solicitud"}
         </button>
-        <p className="text-[11px] text-muted">Sin compromiso. Te llamamos antes de formalizar nada.</p>
+        {formMode === "formspree" && formspreeId && (
+          <a
+            href={whatsappUrl(`Hola, quiero hacerme socio. Nombre: ${values.firstName} ${values.lastName}. Categoría: ${values.category}. Modalidad: ${values.modality}. Email: ${values.email} · Tel: ${values.phone}`)}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="border border-asphalt/30 px-6 py-3 text-sm font-semibold uppercase tracking-[0.12em] text-asphalt transition-colors hover:border-asphalt"
+          >
+            WhatsApp
+          </a>
+        )}
       </div>
     </form>
   );
 }
+
+export default MembershipForm;
