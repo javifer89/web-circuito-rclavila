@@ -38,15 +38,13 @@ export default function HomePage() {
           <div>
             <p className="eyebrow">Villajoyosa · Alicante</p>
             <h1 className="display-xl mt-4 text-[13vw] leading-[0.88] text-dust sm:text-7xl lg:text-[5.5rem]">
-              Circuito de
-              <br />
-              radiocontrol
-              <br />
-              <span className="text-accent">en Villajoyosa</span>
+              CIRCUITO DE RADIOCONTROL - RC LA VILA
             </h1>
             <p className="mt-6 max-w-xl text-base leading-relaxed text-muted sm:text-lg">
-              Pista permanente de tierra para buggy, truggy y short course. Acceso libre para socios
-              todos los días del año, con boxes cubiertos, iluminación y cronometraje.
+              Pista permanente de tierra para buggy, truggy y short course.
+            </p>
+            <p className="mt-2 text-sm text-muted">
+              Villajoyosa (Alicante)
             </p>
 
             <div className="mt-9 flex flex-col gap-3 sm:flex-row">
