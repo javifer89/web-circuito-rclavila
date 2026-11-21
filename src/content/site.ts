@@ -20,12 +20,13 @@ export const site = {
     whatsapp: "34600000000",
     instagram: "https://www.instagram.com/rclavila",
     facebook: "https://www.facebook.com/rclavila",
+    tiktok: "https://www.tiktok.com/@rclavila",
     youtube: "",
   },
 
   // TODO(contenido): dirección exacta y enlace real de Google Maps.
   address: {
-    street: "Partida de la Mar, s/n",
+    street: "Partida Atalayas, 1",
     postalCode: "03570",
     town: "Villajoyosa",
     province: "Alicante",
@@ -62,7 +63,7 @@ export function whatsappUrl(message = "Hola, me gustaría recibir información s
 }
 
 export function mapsUrl() {
-  return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(site.address.mapsQuery)}`;
+  return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(site.address.street)}`;
 }
 
 export function formattedAddress() {

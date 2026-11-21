@@ -1,0 +1,40 @@
+{
+
+    "workbench.colorCustomizations": {
+        // Barra de título
+        "titleBar.activeBackground": "#0D0D0D",
+        "titleBar.activeForeground": "#C6FF00",
+        "titleBar.inactiveBackground": "#1A1A1A",
+        "titleBar.inactiveForeground": "#9E9E9E",
+        // Barra de actividad (izquierda)
+        "activityBar.background": "#0D0D0D",
+        "activityBar.foreground": "#E91E8C",
+        "activityBar.inactiveForeground": "#9E9E9E",
+        "activityBarBadge.background": "#C6FF00",
+        "activityBarBadge.foreground": "#0D0D0D",
+        // Barra de estado (abajo)
+        "statusBar.background": "#E91E8C",
+        "statusBar.foreground": "#0D0D0D",
+        "statusBar.noFolderBackground": "#1A1A1A",
+        "statusBar.debuggingBackground": "#C6FF00",
+        "statusBar.debuggingForeground": "#0D0D0D",
+        // Editor
+        "editor.background": "#0D0D0D",
+        "editor.foreground": "#F5F5F5",
+        "editor.lineHighlightBackground": "#1A1A1A",
+        "editorCursor.foreground": "#C6FF00",
+        "editor.selectionBackground": "#E91E8C55",
+        "editorLineNumber.foreground": "#9E9E9E",
+        "editorLineNumber.activeForeground": "#E91E8C",
+        // Sidebar (explorador)
+        "sideBar.background": "#1A1A1A",
+        "sideBar.foreground": "#F5F5F5",
+        "sideBarTitle.foreground": "#C6FF00",
+        // Pestañas
+        "tab.activeBackground": "#0D0D0D",
+        "tab.activeForeground": "#C6FF00",
+        "tab.inactiveBackground": "#1A1A1A",
+        "tab.inactiveForeground": "#9E9E9E",
+        "tab.activeBorderTop": "#E91E8C"},
+  "window.title": "【CIRCUITO RC LAVILA】 ${activeEditorShort}${separator}${rootName}" // Añadir prefijo distintivo al título
+}

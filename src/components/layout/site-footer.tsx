@@ -41,6 +41,16 @@ export async function SiteFooter() {
                   Facebook
                 </a>
               ) : null}
+              {site.contact.tiktok ? (
+                <a
+                  href={site.contact.tiktok}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="border border-line px-3 py-2 text-[11px] uppercase tracking-[0.12em] text-muted transition-colors hover:border-dust hover:text-dust"
+                >
+                  TikTok
+                </a>
+              ) : null}
             </div>
           </div>
 
