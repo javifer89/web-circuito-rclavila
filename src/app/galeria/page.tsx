@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     description:
       "Fotos y vídeos del circuito RC La Vila: pista, boxes, pruebas sociales y campeonato.",
     url: "https://www.rclavila.com/galeria",
-    site: "@rclavila",
+    siteName: site.name,
     images: [
       {
         url: "https://www.rclavila.com/galeria",

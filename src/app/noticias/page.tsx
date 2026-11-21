@@ -5,6 +5,7 @@ import { Section } from "@/components/layout/container";
 import { MediaPlaceholder } from "@/components/ui/media-placeholder";
 import { ArrowRight } from "@/components/ui/button";
 import { posts, formatPostDate } from "@/content/noticias";
+import { site } from "@/content/site";
 
 export const ensureStatic = "navigation";
 
@@ -18,7 +19,7 @@ export const metadata: Metadata = {
     description:
       "Noticias del club RC La Vila: avances de obra, resultados de las pruebas sociales y novedades de la instalación.",
     url: "https://www.rclavila.com/noticias",
-    site: "@rclavila",
+    siteName: site.name,
     images: [
       {
         url: "https://www.rclavila.com/noticias",

@@ -6,6 +6,7 @@ import { Section } from "@/components/layout/container";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { ButtonLink, ArrowRight } from "@/components/ui/button";
 import { specs, facilities, classes } from "@/content/circuito";
+import { site } from "@/content/site";
 import vistaAerea from "@/assets/vista aerea circuito.jpeg";
 
 export const ensureStatic = "navigation";
@@ -20,7 +21,7 @@ export const metadata: Metadata = {
     description:
       "Ficha técnica del circuito de radiocontrol RC La Vila en Villajoyosa (Alicante): superficie, firme, categorías, boxes cubiertos, iluminación y cronometraje.",
     url: "https://www.rclavila.com/el-circuito",
-    site: "@rclavila",
+    siteName: site.name,
     images: [
       {
         url: "https://www.rclavila.com/vista-aerea",

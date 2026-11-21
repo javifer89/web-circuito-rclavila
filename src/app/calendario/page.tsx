@@ -5,6 +5,7 @@ import { Faq } from "@/components/ui/faq";
 import { MediaPlaceholder } from "@/components/ui/media-placeholder";
 import { ButtonLink } from "@/components/ui/button";
 import { events, eventTypes, formatEventDate, eventDayMonth, type CircuitEvent } from "@/content/eventos";
+import { site } from "@/content/site";
 import { whatsappUrl } from "@/content/site";
 
 export const ensureStatic = "navigation";
@@ -19,7 +20,7 @@ export const metadata: Metadata = {
     description:
       "Calendario de eventos del circuito RC La Vila: pruebas sociales, campeonato interno, entrenamientos y carreras abiertas.",
     url: "https://www.rclavila.com/calendario",
-    site: "@rclavila",
+    siteName: site.name,
     images: [
       {
         url: "https://www.rclavila.com/calendario",

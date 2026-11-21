@@ -5,6 +5,7 @@ import { SectionHeading } from "@/components/ui/section-heading";
 import { Faq } from "@/components/ui/faq";
 import { ButtonLink, ArrowRight } from "@/components/ui/button";
 import { plans, dayPass, included, notIncluded } from "@/content/tarifas";
+import { site } from "@/content/site";
 import { cn } from "@/lib/cn";
 
 export const ensureStatic = "navigation";
@@ -19,7 +20,7 @@ export const metadata: Metadata = {
     description:
       "Cuotas de socio del circuito RC La Vila: mensual, trimestral y juvenil. Acceso a pista, boxes y pruebas sociales. Sin permanencia obligatoria.",
     url: "https://www.rclavila.com/tarifas",
-    site: "@rclavila",
+    siteName: site.name,
     images: [
       {
         url: "https://www.rclavila.com/precios",

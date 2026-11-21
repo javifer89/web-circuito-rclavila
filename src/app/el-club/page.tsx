@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     description:
       "Historia, junta directiva y normativa del club RC La Vila, circuito de radiocontrol de Villajoyosa.",
     url: "https://www.rclavila.com/el-club",
-    site: "@rclavila",
+    siteName: site.name,
     images: [
       {
         url: "https://www.rclavila.com/socios",
