@@ -10,9 +10,34 @@ import { cn } from "@/lib/cn";
 export const ensureStatic = "navigation";
 
 export const metadata: Metadata = {
-  title: "Tarifas",
+  title: ["Tarifas RC La Vila", "Cuotas de socio"].join(" · "),
   description:
-    "Cuotas de socio del circuito RC La Vila: mensual, trimestral y juvenil. Incluye acceso libre a la pista, boxes y pruebas sociales del club.",
+    "Cuotas de socio del circuito RC La Vila: mensual, trimestral y juvenil. Incluye acceso libre a la pista, boxes y pruebas sociales del club. Sin permanencia obligatoria ni letra pequeña.",
+  keywords: ["circuito", "rc", "villajoyosa", "cuotas", "socio", "precio", "day pass"],
+  openGraph: {
+    title: "Tarifas RC La Vila - Cuotas de socio",
+    description:
+      "Cuotas de socio del circuito RC La Vila: mensual, trimestral y juvenil. Acceso a pista, boxes y pruebas sociales. Sin permanencia obligatoria.",
+    url: "https://www.rclavila.com/tarifas",
+    site: "@rclavila",
+    images: [
+      {
+        url: "https://www.rclavila.com/precios",
+        width: 1200,
+        height: 630,
+        alt: "Tarifas y cuotas del circuito RC La Vila",
+      },
+    ],
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Tarifas RC La Vila - Cuotas de socio",
+    description:
+      "Cuotas de socio del circuito RC La Vila. Acceso a pista, boxes y sin permanencia.",
+    images: ["https://www.rclavila.com/precios"],
+    site: "@rclavila",
+  },
   alternates: { canonical: "/tarifas" },
 };
 

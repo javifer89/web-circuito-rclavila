@@ -9,9 +9,34 @@ import { posts, formatPostDate } from "@/content/noticias";
 export const ensureStatic = "navigation";
 
 export const metadata: Metadata = {
-  title: "Noticias",
+  title: ["Noticias RC La Vila", "Últimas novedades"].join(" · "),
   description:
     "Noticias del club RC La Vila: avances de obra, resultados de las pruebas sociales y novedades de la instalación.",
+  keywords: ["circuito", "rc", "villajoyosa", "noticias", "pruebas", "campeonato", "instalación"],
+  openGraph: {
+    title: "Noticias RC La Vila - Últimas novedades",
+    description:
+      "Noticias del club RC La Vila: avances de obra, resultados de las pruebas sociales y novedades de la instalación.",
+    url: "https://www.rclavila.com/noticias",
+    site: "@rclavila",
+    images: [
+      {
+        url: "https://www.rclavila.com/noticias",
+        width: 1200,
+        height: 630,
+        alt: "Portada de noticia RC La Vila",
+      },
+    ],
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Noticias RC La Vila - Últimas novedades",
+    description:
+      "Noticias del club RC La Vila: avances de obra, resultados de las pruebas sociales y novedades de la instalación.",
+    images: ["https://www.rclavila.com/noticias"],
+    site: "@rclavila",
+  },
   alternates: { canonical: "/noticias" },
 };
 

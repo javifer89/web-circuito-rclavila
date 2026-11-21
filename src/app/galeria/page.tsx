@@ -11,9 +11,34 @@ import fotoSocios from "@/assets/foto sudaderas nuevas.jpeg";
 export const ensureStatic = "navigation";
 
 export const metadata: Metadata = {
-  title: "Galería",
+  title: ["Galería RC La Vila", "El circuito en imágenes"].join(" · "),
   description:
-    "Fotos y vídeos del circuito RC La Vila: pista, boxes, pruebas sociales y campeonato.",
+    "Fotos y vídeos del circuito RC La Vila: pista, boxes, pruebas sociales y campeonato. El galería se irá llenando con material del club.",
+  keywords: ["circuito", "rc", "villajoyosa", "galería", "fotos", "videos", "pista"],
+  openGraph: {
+    title: "Galería RC La Vila - El circuito en imágenes",
+    description:
+      "Fotos y vídeos del circuito RC La Vila: pista, boxes, pruebas sociales y campeonato.",
+    url: "https://www.rclavila.com/galeria",
+    site: "@rclavila",
+    images: [
+      {
+        url: "https://www.rclavila.com/galeria",
+        width: 1200,
+        height: 630,
+        alt: "Galería de fotos RC La Vila",
+      },
+    ],
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Galería RC La Vila - El circuito en imágenes",
+    description:
+      "Fotos y vídeos del circuito RC La Vila: pista, boxes y pruebas sociales.",
+    images: ["https://www.rclavila.com/galeria"],
+    site: "@rclavila",
+  },
   alternates: { canonical: "/galeria" },
 };
 

@@ -11,9 +11,34 @@ import vistaAerea from "@/assets/vista aerea circuito.jpeg";
 export const ensureStatic = "navigation";
 
 export const metadata: Metadata = {
-  title: "El circuito",
+  title: ["El circuito RC La Vila", "Ficha técnica"].join(" · "),
   description:
-    "Ficha técnica del circuito de radiocontrol RC La Vila en Villajoyosa: superficie, firme, categorías, boxes cubiertos, iluminación y cronometraje.",
+    "Ficha técnica del circuito de radiocontrol RC La Vila en Villajoyosa (Alicante): superficie, firme, categorías, boxes cubiertos, iluminación y cronometraje. Consulta las especificaciones completas y contacta con el club.",
+  keywords: ["circuito", "radiocontrol", "rc", "villajoyosa", "pilotaje", "pista"],
+  openGraph: {
+    title: "El circuito RC La Vila - Ficha técnica",
+    description:
+      "Ficha técnica del circuito de radiocontrol RC La Vila en Villajoyosa (Alicante): superficie, firme, categorías, boxes cubiertos, iluminación y cronometraje.",
+    url: "https://www.rclavila.com/el-circuito",
+    site: "@rclavila",
+    images: [
+      {
+        url: "https://www.rclavila.com/vista-aerea",
+        width: 1200,
+        height: 630,
+        alt: "Vista aérea del circuito RC La Vila",
+      },
+    ],
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "El circuito RC La Vila - Ficha técnica",
+    description:
+      "Ficha técnica del circuito de radiocontrol RC La Vila en Villajoyosa (Alicante).",
+    images: ["https://www.rclavila.com/vista-aerea"],
+    site: "@rclavila",
+  },
   alternates: { canonical: "/el-circuito" },
 };
 

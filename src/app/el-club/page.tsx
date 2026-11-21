@@ -11,9 +11,34 @@ import fotoSocios from "@/assets/foto sudaderas nuevas.jpeg";
 export const ensureStatic = "navigation";
 
 export const metadata: Metadata = {
-  title: "El club",
+  title: ["El club RC La Vila", "Historia y junta directiva"].join(" · "),
   description:
-    "Historia, junta directiva y normativa del club RC La Vila, circuito de radiocontrol de Villajoyosa.",
+    "Historia, junta directiva y normativa del club RC La Vila, circuito de radiocontrol de Villajoyosa (Alicante). Conoce quiénes somos y la documentación del club.",
+  keywords: ["circuito", "rc", "villajoyosa", "club", "historia", "junta", "normativa"],
+  openGraph: {
+    title: "El club RC La Vila - Historia y junta directiva",
+    description:
+      "Historia, junta directiva y normativa del club RC La Vila, circuito de radiocontrol de Villajoyosa.",
+    url: "https://www.rclavila.com/el-club",
+    site: "@rclavila",
+    images: [
+      {
+        url: "https://www.rclavila.com/socios",
+        width: 1200,
+        height: 630,
+        alt: "Socios del RC La Vila",
+      },
+    ],
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "El club RC La Vila - Historia y junta directiva",
+    description:
+      "Historia y junta directiva del circuito RC La Vila en Villajoyosa.",
+    images: ["https://www.rclavila.com/socios"],
+    site: "@rclavila",
+  },
   alternates: { canonical: "/el-club" },
 };
 

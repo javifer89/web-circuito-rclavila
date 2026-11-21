@@ -10,9 +10,34 @@ import { whatsappUrl } from "@/content/site";
 export const ensureStatic = "navigation";
 
 export const metadata: Metadata = {
-  title: "Calendario",
+  title: ["Calendario RC La Vila", "Próximos eventos"].join(" · "),
   description:
-    "Calendario de eventos del circuito RC La Vila: pruebas sociales, campeonato interno, entrenamientos con cronometraje y pruebas abiertas.",
+    "Calendario de eventos del circuito RC La Vila: pruebas sociales, campeonato interno, entrenamientos con cronometraje y pruebas abiertas a pilotos de fuera del club. Consulta fechas e inscripciones.",
+  keywords: ["circuito", "rc", "villajoyosa", "calendario", "eventos", "pruebas", "carreras"],
+  openGraph: {
+    title: "Calendario RC La Vila - Próximos eventos",
+    description:
+      "Calendario de eventos del circuito RC La Vila: pruebas sociales, campeonato interno, entrenamientos y carreras abiertas.",
+    url: "https://www.rclavila.com/calendario",
+    site: "@rclavila",
+    images: [
+      {
+        url: "https://www.rclavila.com/calendario",
+        width: 1200,
+        height: 630,
+        alt: "Calendario de eventos RC La Vila",
+      },
+    ],
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Calendario RC La Vila - Próximos eventos",
+    description:
+      "Calendario de eventos del circuito RC La Vila: fechas de pruebas y carreras.",
+    images: ["https://www.rclavila.com/calendario"],
+    site: "@rclavila",
+  },
   alternates: { canonical: "/calendario" },
 };
 

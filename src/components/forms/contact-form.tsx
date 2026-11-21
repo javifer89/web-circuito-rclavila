@@ -197,12 +197,12 @@ export function ContactForm({ formMode = "formspree", formspreeId = "xppdpgdo" }
           Enviar formulario
         </button>
         <a
-          href={whatsappUrl("Hola, consultas del sitio web.")}
+          href={whatsappUrl(`Hola, consultas del sitio web. Nombre: ${values.name} - Email: ${values.email} - Tema: ${values.topic}`)}
           target="_blank"
           rel="noopener noreferrer"
           className="border border-asphalt/30 px-6 py-3 text-sm font-semibold uppercase tracking-[0.12em] text-asphalt transition-colors hover:border-asphalt"
         >
-          WhatsApp
+          Continuar por WhatsApp
         </a>
       </div>
     </form>
