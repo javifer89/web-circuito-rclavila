@@ -108,7 +108,7 @@ export default function ContactoPage() {
             style={{ border: "none" }}
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
-            src={`https://www.google.com/maps/embed?query=${encodeURIComponent(`${site.address.street} ${site.address.town}, ${site.address.province}`)}`}
+            src={`https://www.google.com/maps/embed?query=${encodeURIComponent(site.address.street)}`}
             title="Mapa de ubicación RC La Vila"
           />
           <div>
