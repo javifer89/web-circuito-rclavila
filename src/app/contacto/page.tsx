@@ -102,10 +102,14 @@ export default function ContactoPage() {
 
       <Section className="border-t border-line bg-surface/60">
         <div className="grid gap-10 lg:grid-cols-2 lg:items-center">
-          <MediaPlaceholder
-            label="Mapa de ubicación"
-            note="Aquí va el mapa embebido con la ubicación real"
-            ratio="aspect-[4/3]"
+          <iframe
+            width="100%"
+            height="400"
+            style={{ border: "none" }}
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+            src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d1762.347154319403!2d-0.2454018682525686!3d38.47739287534067!2m3!1f0!2f0!3f0!3m2!1i0!2i0!4f0!5e0!3m2!1ses-ES!2ses!5m1!1s0x12e2e2b2b2b2b2b3:0x1c3d4e5f6a7b8c9d!"
+            title="Mapa de ubicación RC La Vila"
           />
           <div>
             <p className="eyebrow">Cómo llegar</p>
@@ -138,7 +142,7 @@ export default function ContactoPage() {
               rel="noopener noreferrer"
               className="mt-7 inline-flex items-center justify-center border border-line px-6 py-3.5 text-[13px] font-semibold uppercase tracking-[0.12em] text-dust transition-colors hover:border-dust"
             >
-              Abrir en Google Maps
+              Ver mapa más grande
             </a>
           </div>
         </div>
