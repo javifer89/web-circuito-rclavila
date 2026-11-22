@@ -108,7 +108,7 @@ export default function ContactoPage() {
             style={{ border: "none" }}
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
-            src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d1762.347154319403!2d-0.2454018682525686!3d38.47739287534067!2m3!1f0!2f0!3f0!3m2!1i0!2i0!4f0!5e0!3m2!1ses-ES!2ses!5m1!1s0x12e2e2b2b2b2b2b3:0x1c3d4e5f6a7b8c9d!"
+            src={`https://www.google.com/maps/embed?query=${encodeURIComponent(site.contact.mapsQuery)}`}
             title="Mapa de ubicación RC La Vila"
           />
           <div>

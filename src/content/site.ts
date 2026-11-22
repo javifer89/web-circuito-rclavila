@@ -22,6 +22,7 @@ export const site = {
     facebook: "https://www.facebook.com/rclavila",
     tiktok: "https://www.tiktok.com/@rclavila",
     youtube: "",
+    mapsQuery: "RC La Vila Villajoyosa Alicante",
   },
 
   // TODO(contenido): dirección exacta y enlace real de Google Maps.
