@@ -122,25 +122,13 @@ export default function HazteSocioPage() {
 
       <Section className="border-t border-line">
         <div className="grid gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
-          <div className="lg:sticky lg:top-28">
+          <div>
             <p className="eyebrow">Solicitud</p>
             <h2 className="display-lg mt-3 text-4xl text-dust sm:text-5xl">Pide tu alta</h2>
             <p className="mt-5 text-sm leading-relaxed text-muted">
               Rellena el formulario y elige cómo quieres enviarlo. No se cobra nada en este paso:
               primero confirmamos la plaza y después se formaliza el pago.
             </p>
-
-            <div className="mt-8 border border-line bg-surface p-5">
-              <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-dust">
-                Ten a mano
-              </p>
-              <ul className="mt-3 space-y-2 text-sm text-muted">
-                <li>· Documento de identidad del socio</li>
-                <li>· Documento de identidad del tutor, si es menor</li>
-                <li>· Un teléfono de contacto operativo</li>
-                <li>· La modalidad de cuota que prefieres</li>
-              </ul>
-            </div>
           </div>
 
           <div>

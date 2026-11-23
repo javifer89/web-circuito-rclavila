@@ -42,15 +42,18 @@ export function SiteHeader() {
         </a>
 
         <div className="mx-auto flex h-16 w-full max-w-7xl items-center justify-between gap-6 px-5 sm:px-8 lg:h-20">
-          <Link href="/" className="flex shrink-0 items-center" aria-label={`${site.name} — inicio`}>
-            <Image
-              src={logo}
-              alt=""
-              priority
-              sizes="(min-width: 1024px) 90px, 68px"
-              className="h-11 w-auto sm:h-12 lg:h-16"
-            />
-          </Link>
+          <a
+              href="/"
+              className="flex shrink-0 items-center"
+              aria-label={`${site.name} — inicio`}
+            >
+              <Image
+                src={logo}
+                alt=""
+                sizes="(min-width: 1024px) 90px, 68px"
+                className="h-11 w-auto sm:h-12 lg:h-16"
+              />
+            </a>
 
           <nav aria-label="Navegación principal" className="hidden items-center gap-7 lg:flex">
             {nav.map((item) => (
