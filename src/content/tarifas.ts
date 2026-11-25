@@ -54,7 +54,7 @@ export const dayPass = {
 
 export const included = [
   "Uso de pista y boxes durante todo el horario",
-  "Tomas eléctricas y zona de lavado. No dispone de compresor de aire",
+  "Zona de lavado. No dispone de compresor de aire",
   "Cronometraje en las pruebas organizadas",
   "Acceso al calendario de eventos del club",
 ];

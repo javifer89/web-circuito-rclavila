@@ -17,7 +17,7 @@ export const facilities = [
   {
     title: "Boxes cubiertos",
     description:
-      "Zona de boxes con mesa de trabajo, toma eléctrica y bancada para más de 40 pilotos.",
+      "Zona de boxes con mesa de trabajo y bancada para más de 40 pilotos.",
   },
   {
     title: "Podio y zona de mecánicos",
