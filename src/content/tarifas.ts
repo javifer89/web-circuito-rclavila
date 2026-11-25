@@ -49,12 +49,12 @@ export const dayPass = {
   title: "Día completo",
   status: "Próximamente",
   description:
-    "Acceso de un día para visitantes, disponible cuando finalice el cerramiento perimetral. Incluye pista y boxes; no incluye material ni coche.",
+    "Acceso de un día para visitantes, disponible cuando finalice el cerramiento perimetral. Incluye pista y boxes. No dispone de compresor de aire ni zona de carga de baterías. No incluye material ni coche.",
 };
 
 export const included = [
   "Uso de pista y boxes durante todo el horario",
-  "Tomas eléctricas y zona de lavado",
+  "Tomas eléctricas y zona de lavado. No dispone de compresor de aire",
   "Cronometraje en las pruebas organizadas",
   "Acceso al calendario de eventos del club",
 ];

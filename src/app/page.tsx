@@ -100,13 +100,14 @@ export default function HomePage() {
             </h2>
             <p className="mt-5 text-base leading-relaxed text-muted">
               Trazado de tierra tratada y regada a diario, con ancho suficiente para adelantar de
-              verdad. Boxes cubiertos con corriente en cada mesa, podio sobre el pit lane y zona de
-              lavado con agua y aire comprimido.
+              verdad. Boxes cubiertos con corriente en cada mesa, podio sobre el pit lane (contener
+              de barco en proceso de adecuación con escaleras y barandillas) y zona de
+              lavado con agua. No dispone de compresor de aire.
             </p>
             <ul className="mt-8 space-y-3">
               {[
                 "Firme de tierra con moqueta en zonas de saltos y recepciones.",
-                "Pit lane en mejora: expansión de mesas de boxes.",
+                "Pit lane elevado con entrada y salida a cota elevada para no cortar el paso a los coches que ruedan.",
                 "Sin iluminación artificial (entrenamiento diurno).",
                 "Cronometraje LAPMONITOR — cada piloto su transponder.",
               ].map((item) => (
@@ -117,7 +118,7 @@ export default function HomePage() {
               ))}
             </ul>
             <p className="mt-4 text-sm text-muted">
-              Mejoras en curso: vallado perimetral, aumento de mesas de boxes y zona de sombra prevista.
+              Vallado perimetral prácticamente acabado. Acceso al circuito gestionado poniéndose en contacto con el club. Mesas de boxes aumentadas y zona de sombra prevista.
             </p>
             <ButtonLink href="/el-circuito" variant="ghost" className="mt-8 px-0">
               Ficha técnica completa <ArrowRight />

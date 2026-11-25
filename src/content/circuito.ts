@@ -22,7 +22,7 @@ export const facilities = [
   {
     title: "Podio y zona de mecánicos",
     description:
-      "Podio cubierto sobre el pit lane y mesa de mecánicos protegida de la lluvia.",
+      "Contenedor de barco sobre el pit lane, aún en proceso de adecuación (escaleras, barandillas, etc.). Podio cubierto con mesa de mecánicos protegida de la lluvia.",
   },
   {
     title: "Pit lane elevado",
@@ -32,7 +32,7 @@ export const facilities = [
   {
     title: "Limpieza y carburación",
     description:
-      "Zona de lavado con agua y aire comprimido, más mesa de carburación separada.",
+      "Zona de lavado con agua y mesa de carburación separada. No dispone de compresor de aire.",
   },
   {
     title: "Iluminación",
@@ -40,9 +40,9 @@ export const facilities = [
       "Torres de luz sobre pista y boxes para poder entrenar con luz artificial.",
   },
   {
-    title: "Servicios",
+    title: "Servicios y acceso",
     description:
-      "Aseos, cafetería y aparcamiento dentro de la parcela, con acceso de remolque.",
+      "Aseos, cafetería y aparcamiento dentro de la parcela. El vallado perimetral está prácticamente acabado, por lo que el acceso al circuito deberá gestionarse poniéndose en contacto con el club.",
   },
 ];
 

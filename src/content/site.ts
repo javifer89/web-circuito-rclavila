@@ -8,7 +8,7 @@ export const site = {
   legalName: "Circuito de Radiocontrol RC La Vila",
   claim: "El circuito de radiocontrol de la Marina Baixa",
   description:
-    "Circuito de radiocontrol TT(off-road) en Villajoyosa (Alicante). Buggy, truggy y short course, con boxes cubiertos, iluminación y cronometraje.",
+    "Circuito de radiocontrol TT(off-road) en Villajoyosa (Alicante). Buggy, truggy y short course, con boxes cubiertos, iluminación y cronometraje. Sin zona de carga de baterías ni compresor de aire. El acceso se gestiona con el club.",
   url: "https://www.rclavila.com",
 
   /** Update this when the content changes; it drives the sitemap dates. */
