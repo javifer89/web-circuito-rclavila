@@ -5,30 +5,34 @@
 export const specs = [
   { label: "Superficie de la parcela", value: "5.400 m²" },
   { label: "Superficie de pista", value: "1.250 m²" },
-  { label: "Tipo de firme", value: "Tierra tratada, regada a diario" },
+  { label: "Tipo de firme", value: "Tierra prensada, con posibilidad de regado" },
   { label: "Escalas", value: "1/8, 1/10 y 1/14" },
   { label: "Categorías", value: "Buggy, truggy, short course y e-buggy" },
-  { label: "Ancho mínimo de pista", value: "4,5 m" },
+  { label: "Ancho mínimo de pista", value: "3,5 m" },
   { label: "Voltaje de boxes", value: "220 V en cada mesa" },
   { label: "Cronometraje", value: "AMB / MyLaps" },
 ];
 
 export const facilities = [
+  //TODO: BOXES EN PROCESO
   {
     title: "Boxes cubiertos",
     description:
       "Zona de boxes con mesa de trabajo y bancada para más de 40 pilotos.",
   },
+  //todo: PODIO EN PROCESO, LA ZONA DE MECÁNICOS ESTARÁ EN UN FUTURO, AHORA MISMO SOLO DISPONEMOS DEL CONTENEDOR MARITIMO PARA HACER DE PODIO.
   {
     title: "Podio y zona de mecánicos",
     description:
       "Contenedor de barco sobre el pit lane, aún en proceso de adecuación (escaleras, barandillas, etc.). Podio cubierto con mesa de mecánicos protegida de la lluvia.",
   },
+  //TODO: REVISAR COMO ESTA PLANTEADA LA FRASE
   {
-    title: "Pit lane elevado",
+    title: "Pit lane",
     description:
-      "Entrada y salida de boxes a cota elevada para no cortar el paso a los coches que ruedan.",
+      "Entrada y salida de boxes para no cortar el paso a los coches que ruedan.",
   },
+  //todo: todavia no esta la zona de limpieza (agua y aire)
   {
     title: "Limpieza y carburación",
     description:
@@ -39,6 +43,7 @@ export const facilities = [
     description:
       "Torres de luz sobre pista y boxes para poder entrenar con luz artificial.",
   },
+  //TODO: todavia no hay servicios para los pilotos que acudan al circuito, el acceso sí que esta acotado por el vallado ya finalizado
   {
     title: "Servicios y acceso",
     description:
